@@ -26,7 +26,7 @@ namespace TurboCollections
             
             // Assign the result to our field
             items = newArray;
-            
+            //Test
         }
 
         public T Get(int index)
