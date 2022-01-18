@@ -5,7 +5,7 @@ namespace TurboCollections
 {
     public class TurboList<T>
     {
-        public int Count => items.Length;
+        public int Count { get; private set; }
         private T[] items = Array.Empty<T>();
         
         public TurboList()
@@ -15,28 +15,45 @@ namespace TurboCollections
 
         public void Add(T item)
         {
-            //Resize teh Array
+            
+            EnsureSize(Count + 1);
+            items[Count++] = item;
+            
+            // //Resize teh Array
+            // T[] newArray = new T[Count + 1];
+            // for (int i = 0; i < Count; i++)
+            // {
+            //     newArray[i] = items[i];
+            // }
+            // items = newArray;
+            //
+            // //Assing the new element
+            // newArray[Count] = item;
+            //
+            // Count++;
+
+        }
+        
+        /// <summary>
+        /// this method ensures that the array is at least "size big
+        /// </summary>
+        /// <param name="size">the size that your array should have</param> 
+
+        void EnsureSize(int size)
+        {
+            //if the array is lange enough, return!
+            if (items.Length >= size)
+                return;
+            
+            // double the array size, or set to given size if doubling is not enough
+            int newSize = Math.Max(size, items.Length * 2);
+            
             T[] newArray = new T[Count + 1];
             for (int i = 0; i < Count; i++)
             {
                 newArray[i] = items[i];
             }
-            
-            //Assing the new element
-            newArray[Count] = item;
-            
-            // Assign the result to our field
             items = newArray;
-
-            object inputBufferSizeInByte = null;
-            Console.WriteLine("input buffer size:  \t" + inputBufferSizeInByte + " \t in Byte");
-            object amountTotalWeReadInByte = null;
-            Console.WriteLine("total amount read   \t" + amountTotalWeReadInByte + " \t in Byte");
-            object outPutMemoryStream = null;
-            Console.WriteLine("output stream size: \t" + outPutMemoryStream + " \t in Byte");
-            object callWriteCounter = null;
-            Console.WriteLine("called strean write \t" + callWriteCounter + "\t\t times");
-            
         }
 
         public T Get(int index)
