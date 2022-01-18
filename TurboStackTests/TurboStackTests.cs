@@ -1,6 +1,9 @@
 using NUnit.Framework;
 
-namespace TurboStackTests;
+namespace TurboStackTests
+{
+    
+}
 
 public class Tests
 {
