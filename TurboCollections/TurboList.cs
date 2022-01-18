@@ -51,14 +51,23 @@ namespace TurboCollections
             T[] newArray = new T[Count + 1];
             for (int i = 0; i < Count; i++)
             {
+                //copy new array
                 newArray[i] = items[i];
             }
+            
+            // //Resize teh Array
             items = newArray;
         }
 
         public T Get(int index)
         {
             return items[index];
+        }
+
+        public void Set(int index, T item)
+        {
+            //throw new NotImplementedException();
+            
         }
     }
     
