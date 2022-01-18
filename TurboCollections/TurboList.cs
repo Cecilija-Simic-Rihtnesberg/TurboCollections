@@ -7,6 +7,7 @@ namespace TurboCollections
     {
         public int Count => items.Length;
         private T[] items = Array.Empty<T>();
+        
         public TurboList()
         {
             Console.WriteLine(("Hello, Turbo!"));
@@ -26,7 +27,16 @@ namespace TurboCollections
             
             // Assign the result to our field
             items = newArray;
-            //Test
+
+            object inputBufferSizeInByte = null;
+            Console.WriteLine("input buffer size:  \t" + inputBufferSizeInByte + " \t in Byte");
+            object amountTotalWeReadInByte = null;
+            Console.WriteLine("total amount read   \t" + amountTotalWeReadInByte + " \t in Byte");
+            object outPutMemoryStream = null;
+            Console.WriteLine("output stream size: \t" + outPutMemoryStream + " \t in Byte");
+            object callWriteCounter = null;
+            Console.WriteLine("called strean write \t" + callWriteCounter + "\t\t times");
+            
         }
 
         public T Get(int index)
