@@ -48,12 +48,36 @@ namespace TurboCollections.Test
 
         }
         
-        [Test] 
-        public void ExistingItemsCanBeOverwrittenBySetting()
+        [TestCase(666)] 
+        public void ExistingItemsCanBeOverwrittenBySetting(int item)
         {
             var (_, list) = CreateTestData();
-            list.Set(2, 666);
-            Assert.AreEqual(666, list.Get(2));
+            list.Set(2, item);
+            Assert.AreEqual(item, list.Get(2));
+
+        }
+        
+        [Test] 
+        public void CanBeExtendedBySetting()
+        {
+            const int setIndex = 100;
+            var (_, list) = CreateTestData();
+            list.Set(setIndex, 666);
+            Assert.AreEqual(setIndex+1, list.Count);
+            Assert.AreEqual(666, list.Get(setIndex));
+
+        }
+        
+        [Test] 
+        public void ExtendingThroughSettingPersistsOldValues()
+        {
+            const int setIndex = 100;
+            var (numbers, list) = CreateTestData();
+            list.Set(setIndex, 666);
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Assert.AreEqual(numbers[i], list.Get(i));
+            }
 
         }
 

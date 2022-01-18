@@ -8,30 +8,12 @@ namespace TurboCollections
         public int Count { get; private set; }
         private T[] items = Array.Empty<T>();
         
-        public TurboList()
-        {
-            Console.WriteLine(("Hello, Turbo!"));
-        }
-
         public void Add(T item)
         {
             
             EnsureSize(Count + 1);
             items[Count++] = item;
             
-            // //Resize teh Array
-            // T[] newArray = new T[Count + 1];
-            // for (int i = 0; i < Count; i++)
-            // {
-            //     newArray[i] = items[i];
-            // }
-            // items = newArray;
-            //
-            // //Assing the new element
-            // newArray[Count] = item;
-            //
-            // Count++;
-
         }
         
         /// <summary>
@@ -48,14 +30,13 @@ namespace TurboCollections
             // double the array size, or set to given size if doubling is not enough
             int newSize = Math.Max(size, items.Length * 2);
             
-            T[] newArray = new T[Count + 1];
+            T[] newArray = new T[newSize];
             for (int i = 0; i < Count; i++)
             {
                 //copy new array
                 newArray[i] = items[i];
             }
             
-            // //Resize teh Array
             items = newArray;
         }
 
@@ -66,8 +47,13 @@ namespace TurboCollections
 
         public void Set(int index, T item)
         {
-            //throw new NotImplementedException();
-            
+            if (index >= Count)
+            {
+                EnsureSize(index+1);
+                Count = index + 1;
+            }
+            items[index] = item;
+
         }
     }
     
