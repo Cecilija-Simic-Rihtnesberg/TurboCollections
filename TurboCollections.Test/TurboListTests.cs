@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace TurboCollections.Test
@@ -62,24 +63,72 @@ namespace TurboCollections.Test
         {
             const int setIndex = 100;
             var (_, list) = CreateTestData();
-            list.Set(setIndex, 666);
-            Assert.AreEqual(setIndex+1, list.Count);
-            Assert.AreEqual(666, list.Get(setIndex));
+            Assert.Throws<IndexOutOfRangeException>(code: () => list.Set(setIndex, 666));
 
         }
         
         [Test] 
-        public void ExtendingThroughSettingPersistsOldValues()
+        public void IsEmptyAfterClearning()
         {
-            const int setIndex = 100;
-            var (numbers, list) = CreateTestData();
-            list.Set(setIndex, 666);
-            for (int i = 0; i < numbers.Length; i++)
+            var (_, list) = CreateTestData();
+            list.Cear();
+            Assert.Zero(list.Count);
+        }
+        
+        [Test] 
+        public void FirstItemIsAddedAtIndexZeroAfterAfterClearing()
+        {
+            var (_, list) = CreateTestData();
+            
+            list.Cear();
+            list.Add(5);
+            
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual(5, list.Get(0));
+
+        }
+        
+        [Test] 
+        public void ItemsAreClearedWhenClearing()
+        {
+            //given
+            var (_numbers, list) = CreateTestData();
+            
+            // when
+            list.Cear();
+            
+            // then
+            for (int i = 0; i < _numbers.Length; i++)
             {
-                Assert.AreEqual(numbers[i], list.Get(i));
+                Assert.Zero(list.Get(i));
             }
 
         }
+        
+        [Test] 
+        public void CountIsReducedWhenRemovingAt()
+        {
+            var (_numbers, list) = CreateTestData();
+            
+            list.RemoveAt(2);
+            
+            Assert.AreEqual(_numbers.Length -1, list.Count);
+
+        }
+        
+        
+        // [Test] 
+        // public void ExtendingThroughSettingPersistsOldValues()
+        // {
+        //     const int setIndex = 100;
+        //     var (numbers, list) = CreateTestData();
+        //     list.Set(setIndex, 666);
+        //     for (int i = 0; i < numbers.Length; i++)
+        //     {
+        //         Assert.AreEqual(numbers[i], list.Get(i));
+        //     }
+        //
+        // }
 
         (int[] numbers, TurboList<int>) CreateTestData()
         {

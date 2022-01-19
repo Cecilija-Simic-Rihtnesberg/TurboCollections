@@ -47,13 +47,27 @@ namespace TurboCollections
 
         public void Set(int index, T item)
         {
-            if (index >= Count)
-            {
-                EnsureSize(index+1);
-                Count = index + 1;
-            }
+            // if (index >= Count)
+            // {
+            //     EnsureSize(index+1);
+            //     Count = index + 1;
+            // }
             items[index] = item;
 
+        }
+
+        public void Cear()
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                items[i] = default;
+            }
+            Count = 0;
+        }
+
+        public void RemoveAt(int index)
+        {
+            Count--;
         }
     }
     
