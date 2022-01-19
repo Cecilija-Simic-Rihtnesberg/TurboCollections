@@ -67,6 +67,10 @@ namespace TurboCollections
 
         public void RemoveAt(int index)
         {
+            // for (int i = index; i < -1; i++)
+            // {
+            //     items[i] = items[i + 1];
+            // }
             Count--;
         }
     }
