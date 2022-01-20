@@ -67,43 +67,47 @@ namespace TurboCollections.Test
 
         }
         
-        [Test] 
-        public void IsEmptyAfterClearning()
+        public class WhenClearing
         {
-            var (_, list) = CreateTestData();
-            list.Cear();
-            Assert.Zero(list.Count);
-        }
-        
-        [Test] 
-        public void ItemIsAddedAtIndexZeroAfterAfterClearing()
-        {
-            var (_, list) = CreateTestData();
-            
-            list.Cear();
-            list.Add(5);
-            
-            Assert.AreEqual(1, list.Count);
-            Assert.AreEqual(5, list.Get(0));
-
-        }
-        
-        [Test] 
-        public void ItemsAreClearedWhenClearing()
-        {
-            //given
-            var (_numbers, list) = CreateTestData();
-            
-            // when
-            list.Cear();
-            
-            // then
-            for (int i = 0; i < _numbers.Length; i++)
+            [Test] 
+            public void ItIsEmpty()
             {
-                Assert.Zero(list.Get(i));
+                var (_, list) = CreateTestData();
+                list.Cear();
+                Assert.Zero(list.Count);
             }
+        
+            [Test] 
+            public void AddingStartsAtIndexZero()
+            {
+                var (_, list) = CreateTestData();
+            
+                list.Cear();
+                list.Add(5);
+            
+                Assert.AreEqual(1, list.Count);
+                Assert.AreEqual(5, list.Get(0));
 
+            }
+        
+            [Test] 
+            public void ItemsAreResetToDefault()
+            {
+                //given
+                var (_numbers, list) = CreateTestData();
+            
+                // when
+                list.Cear();
+            
+                // then
+                for (int i = 0; i < _numbers.Length; i++)
+                {
+                    Assert.Zero(list.Get(i));
+                }
+
+            } 
         }
+        
         
         [Test] 
         public void CountIsReducedWhenRemovingAt()

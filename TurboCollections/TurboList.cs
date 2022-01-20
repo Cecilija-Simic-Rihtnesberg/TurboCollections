@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TurboCollections
 
@@ -73,7 +74,31 @@ namespace TurboCollections
             // }
             Count--;
         }
+
+        public bool Contains(T item)
+        {
+            //return items.Any(_item => item.Equals(_item));
+            //for (int i = 0; i < Count; i++)
+            {
+                //if (item.Equals(items[i]))
+                    //return true;
+                    return Index(item) != -1;
+            }
+
+            return false;
+        }
+        
+        public int Index(T item)
+        {
+            
+            for (int i = 0; i < Count; i++)
+            {
+                if (item.Equals(items[i]))
+                    return i;
+            }
+
+            return -1;
+        }
     }
     
-
 }
