@@ -99,6 +99,14 @@ namespace TurboCollections
 
             return -1;
         }
+        
+        public void Remove(T item)
+        {
+            var index = Index(item);
+            if (index == -1)
+                return;
+            RemoveAt(index);
+        }
     }
     
 }
