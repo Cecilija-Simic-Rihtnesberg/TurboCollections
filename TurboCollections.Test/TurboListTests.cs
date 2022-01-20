@@ -147,7 +147,7 @@ namespace TurboCollections.Test
         //
         // }
 
-        (int[] numbers, TurboList<int>) CreateTestData()
+        static (int[] numbers, TurboList<int>) CreateTestData()
         {
             int[] numbers = { 5, 7, -12, 9, 3, -4, 104, 12};
             var list = new TurboList<int>();

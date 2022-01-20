@@ -4,7 +4,6 @@ using TurboCollections;
 namespace CustomerManagement
 
 {
-    
     public class CustomerManager
     {
         private IDataAccess dataAccess;
@@ -40,6 +39,16 @@ namespace CustomerManagement
         static void Main(string[] args)
         {
             var turbolist = new TurboList<float>();
+            turbolist.Add(3f);
+            turbolist.Add(-7f);
+            turbolist.Add(1337f);
+            turbolist.Add(1337f);
+            turbolist.RemoveAt(1);
+
+            foreach (var item in turbolist)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
     
