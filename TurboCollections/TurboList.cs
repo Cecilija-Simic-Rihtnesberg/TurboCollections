@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
+
 
 namespace TurboCollections
 
@@ -107,6 +109,16 @@ namespace TurboCollections
                 return;
             RemoveAt(index);
         }
+
+        public void AddRange(IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+               Add(item); 
+            }
+        }
+        
+        
     }
     
 }
