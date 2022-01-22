@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using NUnit.Framework;
 
 namespace TurboCollections.Test
 {
@@ -11,21 +12,35 @@ namespace TurboCollections.Test
             new TurboStack<int>();
             Assert.Pass();
         }
-         public class ANewStack
-         {
-             private TurboStack<int> stack;
-             
-             [SetUp]
-             public void SetUp()
+         public class GivenANewStack
+         { 
+             private static TurboStack<int> Give()
              {
-                 this.stack = new TurboStack<int>();
+                 return new TurboStack<int>();
              }
 
              [Test]
-             public void HasCountOfZero()
+             public void ItHasCountOfZero()
              {
-                 Assert.Zero(stack.Count);
+                 Assert.Zero(Give().Count);
+             }
+             
+             public class WhenPushing
+             {
+                 [TestCase(1), TestCase(5), TestCase(1337)]
+                 public void ItIncreasesCount(int count)
+                 {
+                     //var stack = new TurboList<int>();
+                     //TurboStack<int> stack = new();
+                     var stack = Give();
+                     for (int i = 0; i < count; i++)
+                     {
+                         stack.Push(3);
+                     }
+                     Assert.AreEqual(count, stack.Count);
+                 }
              }
          }
+         
     }
 }
