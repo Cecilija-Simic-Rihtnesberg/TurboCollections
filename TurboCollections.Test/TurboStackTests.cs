@@ -27,16 +27,22 @@ namespace TurboCollections.Test
              
              public class WhenPushing
              {
-                 [TestCase(1), TestCase(5), TestCase(1337)]
-                 public void ItIncreasesCount(int count)
+                 private static TurboStack<int> GiveAndPush(int count)
                  {
-                     //var stack = new TurboList<int>();
-                     //TurboStack<int> stack = new();
                      var stack = Give();
                      for (int i = 0; i < count; i++)
                      {
                          stack.Push(3);
                      }
+
+                     return stack;
+                 }
+                 
+                 [TestCase(1), TestCase(5), TestCase(1337)]
+                 public void ItIncreasesCount(int count)
+                 {
+                     var stack = GiveAndPush(count);
+                     
                      Assert.AreEqual(count, stack.Count);
                  }
 
@@ -45,15 +51,73 @@ namespace TurboCollections.Test
                  [TestCase(1337, 777)]
                  public void TheLatestItemCanBePeeked(int count, int item)
                  {
-                     var stack = Give();
-                     for (int i = 0; i < count; i++)
-                     {
-                         stack.Push(3);
-                     }
+                     var stack = GiveAndPush(count);
                      stack.Push(item);
                      Assert.AreEqual(item, stack.Peek());
                  }
+                 
+                 [TestCase(1, -7)] 
+                 [TestCase(5, 0)]
+                 [TestCase(1337, 777)]
+                 public void TheLatestItemCanBePoppad(int count, int item)
+                 {
+                     var stack = Give();
+                     stack.Push(item);
+                     Assert.AreEqual(item, stack.Pop());
+                 }
+                 
              }
+         }
+         
+         public class GivenAStackWithContent
+         {
+             private static TurboStack<int> Give(int count)
+             {
+                 var stack = new TurboStack<int>();
+                 for (int i = 0; i < count; i++)
+                 {
+                     stack.Push(3);
+                 }
+
+                 return stack;
+             }
+
+             [Test]
+             public void CountNotZiro()
+             {
+                 var stack = Give(7);
+                 Assert.NotZero(stack.Count);
+             }
+             
+             public class WhenPopping
+             {
+                 [TestCase(1)]
+                 [TestCase(7)]
+                 [TestCase(999)]
+                 public void ItDescresesCount(int count)
+                 {
+                     var stack = Give(count);
+                     stack.Pop();
+                     Assert.AreEqual(count - 1, stack.Count);
+                 }
+             }
+         }
+
+         [Test]
+         public void PassesSmokeTest()
+         {
+             var stack = new TurboStack<int>(); // --
+             Assert.Zero(stack.Count);
+             
+             stack.Push(5); // 5
+             Assert.AreEqual(1, stack.Count);
+             Assert.AreEqual(5, stack.Peek());
+
+             stack.Push(7); // 5-7
+             Assert.AreEqual(7, stack.Pop()); // 5
+             Assert.AreEqual(5, stack.Pop()); // --
+             Assert.Zero(stack.Count);
+             
          }
          
     }

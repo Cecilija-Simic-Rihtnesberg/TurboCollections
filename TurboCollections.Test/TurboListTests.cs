@@ -46,7 +46,6 @@ namespace TurboCollections.Test
             {
                 Assert.AreEqual(numbers[i], list.Get(i));
             }
-
         }
         
         [TestCase(666)] 
@@ -55,7 +54,6 @@ namespace TurboCollections.Test
             var (_, list) = CreateTestData();
             list.Set(2, item);
             Assert.AreEqual(item, list.Get(2));
-
         }
         
         [Test] 
@@ -64,7 +62,6 @@ namespace TurboCollections.Test
             const int setIndex = 100;
             var (_, list) = CreateTestData();
             Assert.Throws<IndexOutOfRangeException>(code: () => list.Set(setIndex, 666));
-
         }
         
         public class WhenClearing
@@ -87,7 +84,6 @@ namespace TurboCollections.Test
             
                 Assert.AreEqual(1, list.Count);
                 Assert.AreEqual(5, list.Get(0));
-
             }
         
             [Test] 
@@ -104,7 +100,6 @@ namespace TurboCollections.Test
                 {
                     Assert.Zero(list.Get(i));
                 }
-
             } 
         }
         
@@ -117,7 +112,6 @@ namespace TurboCollections.Test
             list.RemoveAt(2);
             
             Assert.AreEqual(_numbers.Length -1, list.Count);
-
         }
         
         [Test] 
@@ -128,25 +122,9 @@ namespace TurboCollections.Test
             list.RemoveAt(2);
 
             for (int i = 2; i < _numbers.Length-1; i++)
-                //Assert.AreEqual(_numbers[i+1], list.Get(i), $"Wrong item at index {i}");
                 Assert.AreEqual(_numbers.Length -1, list.Count);
-
         }
         
-        
-        // [Test] 
-        // public void ExtendingThroughSettingPersistsOldValues()
-        // {
-        //     const int setIndex = 100;
-        //     var (numbers, list) = CreateTestData();
-        //     list.Set(setIndex, 666);
-        //     for (int i = 0; i < numbers.Length; i++)
-        //     {
-        //         Assert.AreEqual(numbers[i], list.Get(i));
-        //     }
-        //
-        // }
-
         static (int[] numbers, TurboList<int>) CreateTestData()
         {
             int[] numbers = { 5, 7, -12, 9, 3, -4, 104, 12};
