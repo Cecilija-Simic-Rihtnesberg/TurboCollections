@@ -14,34 +14,34 @@ namespace TurboCollections
         public void Add(T item)
         {
             
-            EnsureSize(Count + 1);
+            CollectionUtil.EnsureSize(ref items, Count + 1);
             items[Count++] = item;
             
         }
         
-        /// <summary>
-        /// this method ensures that the array is at least "size big
-        /// </summary>
-        /// <param name="size">the size that your array should have</param> 
-
-        void EnsureSize(int size)
-        {
-            //if the array is lange enough, return!
-            if (items.Length >= size)
-                return;
-            
-            // double the array size, or set to given size if doubling is not enough
-            int newSize = Math.Max(size, items.Length * 2);
-            
-            T[] newArray = new T[newSize];
-            for (int i = 0; i < Count; i++)
-            {
-                //copy new array
-                newArray[i] = items[i];
-            }
-            
-            items = newArray;
-        }
+        // /// <summary>
+        // /// this method ensures that the array is at least "size big
+        // /// </summary>
+        // /// <param name="size">the size that your array should have</param> 
+        //
+        // void EnsureSize(int size)
+        // {
+        //     //if the array is lange enough, return!
+        //     if (items.Length >= size)
+        //         return;
+        //     
+        //     // double the array size, or set to given size if doubling is not enough
+        //     int newSize = Math.Max(size, items.Length * 2);
+        //     // create new array
+        //     T[] newArray = new T[newSize];
+        //     for (int i = 0; i < Count; i++)
+        //     {
+        //         //copy old items
+        //         newArray[i] = items[i];
+        //     }
+        //     // assign new array
+        //     items = newArray;
+        // }
 
         public T Get(int index)
         {

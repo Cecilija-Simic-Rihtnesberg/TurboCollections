@@ -39,6 +39,20 @@ namespace TurboCollections.Test
                      }
                      Assert.AreEqual(count, stack.Count);
                  }
+
+                 [TestCase(1, -7)] 
+                 [TestCase(5, 0)]
+                 [TestCase(1337, 777)]
+                 public void TheLatestItemCanBePeeked(int count, int item)
+                 {
+                     var stack = Give();
+                     for (int i = 0; i < count; i++)
+                     {
+                         stack.Push(3);
+                     }
+                     stack.Push(item);
+                     Assert.AreEqual(item, stack.Peek());
+                 }
              }
          }
          
