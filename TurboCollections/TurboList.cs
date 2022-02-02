@@ -38,6 +38,7 @@ namespace TurboCollections
 
         public void RemoveAt(int index)
         {
+            Array.Copy(items, index + 1, items, index, Count - index - 1);
             Count--;
         }
 
