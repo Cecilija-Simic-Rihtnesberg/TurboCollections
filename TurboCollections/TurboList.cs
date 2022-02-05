@@ -27,6 +27,10 @@ namespace TurboCollections
             items[index] = item;
         }
 
+        public void Swap(int indexA, int indexB)
+        {
+            (items[indexB], items[indexA]) = (items[indexA], items[indexB]);
+        }
         public void Cear()
         {
             for (int i = 0; i < Count; i++)
