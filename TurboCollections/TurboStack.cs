@@ -13,7 +13,7 @@
         }
 
         public T Peek()
-        { 
+        {  
             return items[Count - 1];
         }
         public T Pop()
